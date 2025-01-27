@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Sicheres Formular</title>
+</head>
+<body>
+    <h2>Sicheres Formular mit CSRF-Schutz</h2>
+    <form id="secureForm" action="../backend/process_form.php" method="POST">
+        <input type="hidden" name="csrf_token" id="csrf_token">
+        <input type="text" name="username" placeholder="Benutzername" required>
+        <button type="submit">Absenden</button>
+    </form>
+
+    <script>
+        fetch('../backend/generate_token.php')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('csrf_token').value = data.token;
+            })
+            .catch(error => console.error("Fehler beim Abrufen des Tokens:", error));
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Benutzerrollen verwalten</title>
+</head>
+<body>
+    <h2>Benutzerrollen verwalten</h2>
+    <form id="roleForm">
+        <input type="text" name="username" placeholder="Benutzername" required>
+        <select name="role">
+            <option value="admin">Admin</option>
+            <option value="user">Nutzer</option>
+        </select>
+        <button type="submit">Speichern</button>
+    </form>
+
+    <script>
+        document.getElementById("roleForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let formData = new FormData(this);
+
+            fetch("../backend/manage_roles.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message || data.error))
+            .catch(error => console.error("Fehler:", error));
+        });
+    </script>
+</body>
+</html>

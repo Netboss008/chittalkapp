@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Datei freigeben</title>
+</head>
+<body>
+    <h2>Datei freigeben</h2>
+    <form id="shareForm">
+        <input type="text" name="file" placeholder="Dateiname eingeben" required>
+        <button type="submit">Freigeben</button>
+    </form>
+
+    <p id="shareLink"></p>
+
+    <script>
+        document.getElementById("shareForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let formData = new FormData(this);
+
+            fetch("../backend/share_file.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.link) {
+                    document.getElementById("shareLink").innerText = `Freigabelink: ${data.link}`;
+                } else {
+                    alert("Fehler: " + data.error);
+                }
+            })
+            .catch(error => console.error("Fehler:", error));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Datei herunterladen</title>
+</head>
+<body>
+    <h2>Datei herunterladen</h2>
+    <input type="text" id="fileName" placeholder="Dateiname eingeben">
+    <button onclick="downloadFile()">Download</button>
+
+    <script>
+        function downloadFile() {
+            const fileName = document.getElementById("fileName").value;
+            if (fileName) {
+                window.location.href = `../backend/download_file.php?file=${fileName}`;
+            } else {
+                alert("Bitte Dateinamen eingeben!");
+            }
+        }
+    </script>
+</body>
+</html>

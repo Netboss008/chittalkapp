@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil bearbeiten</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Profil bearbeiten</h2>
+    <form id="profileForm">
+        <input type="text" name="first_name" placeholder="Vorname">
+        <input type="text" name="last_name" placeholder="Nachname">
+        <input type="text" name="tiktok_username" placeholder="TikTok-Name">
+        <input type="email" name="email" placeholder="E-Mail" readonly>
+        <button type="submit">Speichern</button>
+    </form>
+
+    <script>
+        document.getElementById("profileForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            fetch("../backend/update_profile.php", {
+                method: "POST",
+                body: new FormData(this)
+            }).then(response => response.json())
+              .then(data => alert(data.message))
+              .catch(error => console.error("Fehler:", error));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Mehrsprachigkeit</title>
+</head>
+<body>
+    <select id="languageSwitcher">
+        <option value="de">Deutsch</option>
+        <option value="en">English</option>
+    </select>
+
+    <h1 data-translate="title">Willkommen auf ChitTalk</h1>
+    <p data-translate="description">Hier kannst du deine Dateien verwalten.</p>
+    
+    <script>
+        const translations = {
+            de: {
+                title: "Willkommen auf ChitTalk",
+                description: "Hier kannst du deine Dateien verwalten."
+            },
+            en: {
+                title: "Welcome to ChitTalk",
+                description: "Here you can manage your files."
+            }
+        };
+
+        document.getElementById('languageSwitcher').addEventListener('change', (e) => {
+            const selectedLang = e.target.value;
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                element.innerText = translations[selectedLang][element.getAttribute('data-translate')];
+            });
+        });
+    </script>
+</body>
+</html>

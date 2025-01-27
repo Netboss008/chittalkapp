@@ -1,0 +1,19 @@
+<form id="uploadNotificationForm">
+    <input type="text" name="file" placeholder="Dateiname" required>
+    <button type="submit">Benachrichtigen</button>
+</form>
+
+<script>
+    document.getElementById("uploadNotificationForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        let formData = new FormData(this);
+
+        fetch("../backend/notify_upload.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => alert(data.message || data.error))
+        .catch(error => console.error("Fehler:", error));
+    });
+</script>

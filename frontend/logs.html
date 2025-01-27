@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Log anzeigen</title>
+</head>
+<body>
+    <h2>System Logs</h2>
+    <input type="text" id="filter" placeholder="Filter eingeben...">
+    <button onclick="getLogs()">Logs durchsuchen</button>
+    <ul id="logList"></ul>
+
+    <script>
+        function getLogs() {
+            let filter = document.getElementById("filter").value;
+            fetch(`../backend/get_logs.php?filter=${filter}`)
+                .then(response => response.json())
+                .then(data => {
+                    let output = "";
+                    data.forEach(log => {
+                        output += `<li>${log}</li>`;
+                    });
+                    document.getElementById("logList").innerHTML = output;
+                })
+                .catch(error => console.error("Fehler:", error));
+        }
+    </script>
+</body>
+</html>

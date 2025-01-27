@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Dateien anzeigen</title>
+</head>
+<body>
+    <h2>Verfügbare Dateien</h2>
+    <ul id="fileList"></ul>
+
+    <script>
+        fetch("../backend/list_files.php")
+            .then(response => response.text())
+            .then(data => {
+                let parser = new DOMParser();
+                let xml = parser.parseFromString(data, "application/xml");
+                let items = xml.getElementsByTagName("d:href");
+
+                let output = "";
+                for (let i = 1; i < items.length; i++) {
+                    output += `<li>${items[i].textContent.replace('https://chittalk.de/remote.php/dav/files/Dj.Psycho/', '')}</li>`;
+                }
+                document.getElementById("fileList").innerHTML = output;
+            })
+            .catch(error => console.error("Fehler:", error));
+    </script>
+</body>
+</html>

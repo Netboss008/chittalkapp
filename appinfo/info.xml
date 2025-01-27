@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<info>
+    <id>chittalk</id>
+    <name>ChitTalk</name>
+    <description>Cloud- und Community-Plattform</description>
+    <version>1.0.0</version>
+    <licence>AGPL</licence>
+    <author>Dein Name</author>
+    <namespace>OCA\ChitTalk</namespace>
+    <default_enable>yes</default_enable>
+    <types>
+        <filesystem/>
+    </types>
+</info>

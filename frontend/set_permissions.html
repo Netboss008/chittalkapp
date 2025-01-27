@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Berechtigungen setzen</title>
+</head>
+<body>
+    <h2>Berechtigungen setzen</h2>
+    <form id="permissionsForm">
+        <input type="text" name="file" placeholder="Dateiname" required>
+        <select name="permissions">
+            <option value="1">Nur Lesen</option>
+            <option value="15">Voller Zugriff</option>
+        </select>
+        <button type="submit">Berechtigungen setzen</button>
+    </form>
+
+    <script>
+        document.getElementById("permissionsForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let formData = new FormData(this);
+
+            fetch("../backend/set_permissions.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message || data.error))
+            .catch(error => console.error("Fehler:", error));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Match Kalender</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Match Kalender</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Teilnehmer</th>
+                <th>Bemerkung</th>
+            </tr>
+        </thead>
+        <tbody id="matchTable"></tbody>
+    </table>
+
+    <script>
+        fetch("../backend/get_matches.php")
+            .then(response => response.json())
+            .then(matches => {
+                let tableContent = "";
+                matches.forEach(match => {
+                    tableContent += `<tr>
+                        <td>${match.match_time}</td>
+                        <td>${match.user1} vs ${match.user2}</td>
+                        <td>${match.notes}</td>
+                    </tr>`;
+                });
+                document.getElementById("matchTable").innerHTML = tableContent;
+            })
+            .catch(error => console.error("Fehler beim Abrufen der Matches", error));
+    </script>
+</body>
+</html>

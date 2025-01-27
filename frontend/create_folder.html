@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Ordner erstellen</title>
+</head>
+<body>
+    <h2>Neuen Nutzerordner erstellen</h2>
+    <form id="folderForm">
+        <input type="text" name="user_folder" placeholder="Ordnername" required>
+        <button type="submit">Erstellen</button>
+    </form>
+
+    <script>
+        document.getElementById("folderForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let formData = new FormData(this);
+
+            fetch("../backend/create_user_folder.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message || data.error))
+            .catch(error => console.error("Fehler:", error));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistiken</title>
+</head>
+<body>
+    <h2>Nutzungsstatistiken</h2>
+    <ul id="statsList"></ul>
+
+    <script>
+        fetch("../backend/stats.php")
+            .then(response => response.json())
+            .then(data => {
+                let statsHtml = `
+                    <li>Uploads: ${data.uploads}</li>
+                    <li>Downloads: ${data.downloads}</li>
+                    <li>Löschungen: ${data.deletes}</li>
+                `;
+                document.getElementById("statsList").innerHTML = statsHtml;
+            })
+            .catch(error => console.error("Fehler:", error));
+    </script>
+</body>
+</html>

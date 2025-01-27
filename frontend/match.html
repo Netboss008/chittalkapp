@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Match erstellen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Match anlegen</h2>
+    <form action="../backend/create_match.php" method="POST">
+        <input type="text" name="user1_id" placeholder="User 1 ID" required>
+        <input type="text" name="user2_id" placeholder="User 2 ID" required>
+        <input type="datetime-local" name="match_time" required>
+        <textarea name="notes" placeholder="Anmerkungen"></textarea>
+        <button type="submit">Match anlegen</button>
+    </form>
+</body>
+</html>

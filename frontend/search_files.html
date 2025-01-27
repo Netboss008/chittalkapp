@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Dateien durchsuchen</title>
+</head>
+<body>
+    <h2>Dateien durchsuchen</h2>
+    <input type="text" id="searchQuery" placeholder="Dateiname eingeben">
+    <button onclick="searchFiles()">Suchen</button>
+    <ul id="searchResults"></ul>
+
+    <script>
+        function searchFiles() {
+            const query = document.getElementById("searchQuery").value;
+            fetch(`../backend/search_files.php?query=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    let output = "";
+                    data.forEach(file => {
+                        output += `<li>${file}</li>`;
+                    });
+                    document.getElementById("searchResults").innerHTML = output;
+                })
+                .catch(error => console.error("Fehler:", error));
+        }
+    </script>
+</body>
+</html>

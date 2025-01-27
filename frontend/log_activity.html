@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Aktivitäten protokollieren</title>
+</head>
+<body>
+    <h2>Dateiaktivitäten protokollieren</h2>
+    <form id="logForm">
+        <input type="text" name="user" placeholder="Benutzername" required>
+        <input type="text" name="file" placeholder="Dateiname" required>
+        <select name="action">
+            <option value="upload">Upload</option>
+            <option value="download">Download</option>
+            <option value="delete">Löschen</option>
+        </select>
+        <button type="submit">Protokollieren</button>
+    </form>
+
+    <script>
+        document.getElementById("logForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let formData = new FormData(this);
+
+            fetch("../backend/log_activity.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message || data.error))
+            .catch(error => console.error("Fehler:", error));
+        });
+    </script>
+</body>
+</html>

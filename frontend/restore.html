@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Backup wiederherstellen</title>
+</head>
+<body>
+    <h2>Backup wiederherstellen</h2>
+    <button onclick="restoreBackup()">Backup wiederherstellen</button>
+
+    <script>
+        function restoreBackup() {
+            fetch("../backend/restore_data.php")
+            .then(response => response.json())
+            .then(data => alert(data.message || data.error))
+            .catch(error => console.error("Fehler:", error));
+        }
+    </script>
+</body>
+</html>

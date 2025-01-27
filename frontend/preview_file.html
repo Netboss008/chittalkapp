@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Dateivorschau</title>
+</head>
+<body>
+    <h2>Dateivorschau</h2>
+    <input type="text" id="fileName" placeholder="Dateiname eingeben">
+    <button onclick="previewFile()">Vorschau</button>
+
+    <div id="preview"></div>
+
+    <script>
+        function previewFile() {
+            const fileName = document.getElementById("fileName").value;
+            if (fileName) {
+                document.getElementById("preview").innerHTML = 
+                    `<iframe src="https://chittalk.de/remote.php/dav/files/Dj.Psycho/${fileName}" width="600" height="400"></iframe>`;
+            } else {
+                alert("Bitte Dateinamen eingeben!");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Dein Profil</h2>
+    <div id="profileInfo"></div>
+
+    <script>
+        fetch("../backend/get_profile.php")
+            .then(response => response.json())
+            .then(data => {
+                let profileHtml = `<p>Name: ${data.first_name} ${data.last_name}</p>
+                                  <p>E-Mail: ${data.email}</p>
+                                  <p>TikTok: ${data.tiktok_username || 'Kein TikTok'}</p>
+                                  <p>Gruppen: ${data.groups.join(', ')}</p>`;
+                document.getElementById("profileInfo").innerHTML = profileHtml;
+            })
+            .catch(error => console.error("Fehler beim Abrufen des Profils", error));
+    </script>
+</body>
+</html>
